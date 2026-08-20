@@ -53,6 +53,9 @@ AWS EC2 Ubuntu
       |
       v
  GitHub
+```
+
+Changes are reviewed,staged, committed, and pushed to Github using Git.
 
 ## What I am learning
 
