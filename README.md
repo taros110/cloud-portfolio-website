@@ -22,24 +22,74 @@ This project is designed to provide hands-on experience with:
 
 ## Technologies
 
+### Development
+
 - HTML5
 - CSS3
-- Linux / Ubuntu
 - Git
 - GitHub
+- SSH
+
+### Cloud & Infrastructure
+
 - AWS EC2
 - AWS IAM
 - AWS CLI
-- SSH
+- AWS Security Groups
+- Ubuntu Linux
+
+### Web Server
+
+- Nginx
+- HTTP
+
 
 ## Current Features
 
 - Personal portfolio webpage
-- Responsive HTML structure
+- Structured HTML
 - CSS styling
 - Git version control
 - GitHub repository
 - SSH-based authentication between AWS EC2 and GitHub
+- AWS EC2 deployment
+- Ubuntu Linux server administration
+- Nginx web server
+- HTTP website hosting
+- AWS Security Group configuration for web traffic
+
+
+## Deployment
+
+The portfolio website is deployed on an AWS EC2 Ubuntu instance and served using Nginx.
+
+### Deployment Architecture
+
+```text
+Internet
+   |
+   | HTTP :80
+   v
+AWS Security Group
+   |
+   v
+AWS EC2
+   |
+   v
+Ubuntu Linux
+   |
+   v
+Nginx
+   |
+   v
+/var/www/html
+   |
+   +-- index.html
+   |
+   +-- css/
+       |
+       +-- style.css
+```
 
 ## Development Workflow
 
