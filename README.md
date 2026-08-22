@@ -1,152 +1,222 @@
+Cloud Portfolio Website
 
-# Cloud Portfolio Website
+About This Project
+This project is a personal portfolio website that I am building while developing practical skills in cloud computing, DevOps, Linux administration, containerization, automation, and software development.
 
-## About This Project
+The project is deployed on an Ubuntu Linux environment running on AWS EC2 and is managed using Git and GitHub.
 
-This project is a personal portfolio website that I am building while developing practical skills in cloud computing, DevOps, Linux, and software development.
+The application is containerized with Docker and Docker Compose, served through Nginx as a reverse proxy, and automatically deployed using GitHub Actions.
 
-The project is being developed on an Ubuntu Linux environment running on AWS EC2 and managed using Git and GitHub.
+Project Goals
+This project provides hands-on experience with:
 
-## Project Goals
-
-This project is designed to provide hands-on experience with:
-
-- Cloud infrastructure
-- Linux administration
-- Version control
-- Infrastructure as Code
-- Containerization
-- CI/CD automation
-- Cloud deployment
-- Monitoring and documentation
-
-## Technologies
-
-### Development
-
-- HTML5
-- CSS3
-- Git
-- GitHub
-- SSH
-
-### Cloud & Infrastructure
-
-- AWS EC2
-- AWS IAM
-- AWS CLI
-- AWS Security Groups
-- Ubuntu Linux
-
-### Web Server
-
-- Nginx
-- HTTP
-
-
-## Current Features
-
-- Personal portfolio webpage
-- Structured HTML
-- CSS styling
-- Git version control
-- GitHub repository
-- SSH-based authentication between AWS EC2 and GitHub
-- AWS EC2 deployment
-- Ubuntu Linux server administration
-- Nginx web server
-- HTTP website hosting
-- AWS Security Group configuration for web traffic
-
-
-## Deployment
-
-The portfolio website is deployed on an AWS EC2 Ubuntu instance and served using Nginx.
-
-### Deployment Architecture
-
-```text
-Internet
-   |
-   | HTTP :80
-   v
-AWS Security Group
-   |
-   v
+Cloud infrastructure
+Linux administration
+Version control
+Containerization
+Reverse proxy configuration
+CI/CD automation
+Cloud deployment
+Secure SSH access
+Infrastructure as Code
+Monitoring and documentation
+Technologies
+Development
+HTML5
+CSS3
+Git
+GitHub
+SSH
+Cloud & Infrastructure
 AWS EC2
-   |
-   v
+AWS IAM
+AWS Security Groups
 Ubuntu Linux
-   |
-   v
+Containers & Deployment
+Docker
+Docker Compose
+GitHub Actions
 Nginx
-   |
-   v
-/var/www/html
-   |
-   +-- index.html
-   |
-   +-- css/
-       |
-       +-- style.css
-```
+Current Features
+Personal portfolio webpage
+Structured HTML
+CSS styling
+Git version control
+GitHub repository
+AWS EC2 deployment
+Ubuntu Linux server administration
+Docker containerization
+Docker Compose configuration
+Nginx web server
+Nginx reverse proxy
+AWS Security Group configuration
+Automated CI/CD deployment with GitHub Actions
+GitHub Actions encrypted secrets for EC2 deployment
+Deployment Architecture
+The portfolio is deployed to an AWS EC2 Ubuntu server.
 
-## Development Workflow
+Nginx receives public HTTP traffic on port 80 and acts as a reverse proxy to the Dockerized portfolio application.
 
-The project is developed on an AWS Ubuntu environment and version-controlled with Git.
+                         Internet
+                            |
+                            | HTTP :80
+                            v
+                    AWS Security Group
+                            |
+                            v
+                       AWS EC2
+                            |
+                            v
+                     Ubuntu Linux
+                            |
+                            v
+                      Nginx :80
+                            |
+                    Reverse Proxy
+                            |
+                            v
+                  Docker Compose
+                            |
+                            v
+               Portfolio Container :80
+                            |
+                            v
+                    Portfolio Website
+CI/CD Architecture
+The project uses GitHub Actions to automate deployment.
 
-```text
-AWS EC2 Ubuntu
-      |
-      v
-   Git
-      |
-      v
- GitHub
-```
+When changes are pushed to the main branch, GitHub Actions first validates the Docker Compose configuration. If validation succeeds, the workflow connects securely to the EC2 server using SSH, pulls the latest changes, and rebuilds the Docker Compose application.
 
-Changes are reviewed,staged, committed, and pushed to Github using Git.
+Developer
+    |
+    | git push
+    v
+  GitHub
+    |
+    v
+GitHub Actions
+    |
+    +------------------+
+    |                  |
+    v                  v
+Validate            Deploy
+Docker Compose        |
+    |                 |
+    +-------+---------+
+            |
+            v
+          EC2
+            |
+            v
+         git pull
+            |
+            v
+    Docker Compose build
+            |
+            v
+    Updated Portfolio
+Development Workflow
+The project is managed using Git and GitHub.
 
-## What I am learning
+Typical development workflow:
 
-I am currently developing practical skills in cloud computing, DevOps, and software development through hands-on projects and self-directed learning.
+Edit Website
+     |
+     v
+git status
+     |
+     v
+git add
+     |
+     v
+git commit
+     |
+     v
+git push
+     |
+     v
+GitHub Actions
+     |
+     v
+Automated Deployment
+Changes pushed to the main branch trigger the CI/CD workflow.
 
-### Cloud & DevOps
+Docker
+The application is containerized using Docker.
 
-- AWS cloud services and cloud infrastructure
-- Linux administration and command-line operations
-- Git and GitHub version control
-- SSH and secure remote access
-- Docker and containerization
-- Terraform and Infrastructure as Code
-- CI/CD and automated deployments
-- Cloud monitoring and logging
+The Dockerfile defines how the portfolio application is packaged into a Docker image.
 
-### Programming & Development
+Docker Compose is used to manage the running container through compose.yaml.
 
-- Python fundamentals and scripting
-- HTML and CSS
-- Automation and scripting for DevOps workflows
+The application can be started with:
 
-## Future Improvements
+docker compose up -d
+The container exposes port 80 internally and is mapped to port 8080 on the EC2 host.
 
-The project will continue to evolve as I develop my Cloud and DevOps skills.
+Nginx receives public traffic on port 80 and forwards requests to the Docker container.
 
+GitHub Actions
+The project uses GitHub Actions for continuous integration and continuous deployment.
+
+The workflow performs two main jobs:
+
+1. Validate
+The workflow checks out the repository and validates the Docker Compose configuration.
+
+2. Deploy
+After successful validation, GitHub Actions connects to the EC2 server using encrypted GitHub repository secrets.
+
+The deployment process:
+
+Connects to the EC2 server.
+Navigates to the project directory.
+Pulls the latest changes from GitHub.
+Rebuilds the Docker image.
+Restarts the application using Docker Compose.
+This allows website updates to be deployed without manually rebuilding the application on the server.
+
+Project Structure
+cloud-portfolio-website/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── css/
+│   └── style.css
+├── index.html
+├── Dockerfile
+├── compose.yaml
+└── README.md
+What I Am Learning
+I am developing practical skills in cloud computing, DevOps, Linux administration, and software development through hands-on projects and self-directed learning.
+
+Cloud & DevOps
+AWS cloud services and infrastructure
+Linux administration and command-line operations
+Git and GitHub version control
+SSH and secure remote access
+Docker and containerization
+Docker Compose
+Nginx and reverse proxy configuration
+CI/CD and automated deployments
+Infrastructure as Code
+Cloud monitoring and logging
+Programming & Development
+Python fundamentals and scripting
+HTML and CSS
+Automation and scripting for DevOps workflows
+Future Improvements
 Planned improvements include:
 
-- Deploy the portfolio website on AWS
-- Configure the application for secure and reliable hosting
-- Containerize the application using Docker
-- Create AWS infrastructure using Terraform
-- Implement CI/CD using GitHub Actions
-- Add automated testing
-- Add monitoring and logging
-- Improve the website design and mobile responsiveness
-- Add links to additional Cloud and DevOps projects
-- Document the architecture and deployment process
-
-## Author
-
+Configure HTTPS using TLS certificates
+Connect a custom domain
+Create AWS infrastructure using Terraform
+Add automated application testing
+Add monitoring and logging
+Improve website design and mobile responsiveness
+Add links to additional Cloud and DevOps projects
+Further improve deployment security
+Expand the CI/CD pipeline with additional validation and testing
+Author
 Rosaline Mpeh Tanyi
 
 Aspiring Cloud & DevOps Engineer
